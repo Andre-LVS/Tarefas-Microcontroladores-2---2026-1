@@ -32,8 +32,8 @@ static const char *TAG = "IR_Line";
 
 
 // ========= Velocidades  =========
-#define VEL_MAX      225  // Velocidade máxima  225 ficou bom
-#define VEL_MIN      190  // Velocidade mínima 190 ficou bom
+#define VEL_MAX      225  // Velocidade máxima  na faixa de 200~225 ficou bom. Velocidades mais rápidas fazem o carrinho sair da pista.
+#define VEL_MIN      190  // Velocidade mínima na faixa de 170~190 ficou bom. Valores muito baixos não dá torque no carrinho e ele para com o próprio peso.
 
 
 // ===================================
