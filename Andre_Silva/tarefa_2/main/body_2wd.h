@@ -18,4 +18,7 @@ void Body2WD_SetErro(float erro);
 
 void Body2WD_Compute(void);
 
+//Parr ao detectar objeto
+void Body2WD_detectarObjeto(int bloqueado); // 1 = parar, 0 = livre
+
 //=============================================

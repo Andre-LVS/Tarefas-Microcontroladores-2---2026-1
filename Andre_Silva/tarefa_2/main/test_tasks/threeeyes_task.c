@@ -1,4 +1,5 @@
 #include "threeeyes_task.h"
+#include "body_2wd.h"
 
 //=========================
 //Para parar o robô ao detectar um obstáculo
@@ -46,13 +47,14 @@ portTASK_FUNCTION(Threeeyes, args)
         if (distance < 10.0)
         {
 			 //vTaskSuspend(pid_task_handle);   //por algum motivo o taskSUspend e taskresume nõa funciona, o robô trava
-            wheel_SetVel( 0, 0);
-                
+            //wheel_SetVel( 0, 0);
+            Body2WD_SetBloqueado(1);   
             ESP_LOGI(TAG, "Obstáculo detectado.");
         }
 
         else
         {
+             Body2WD_SetBloqueado(0);
             //vTaskResume(pid_task_handle);
         }
 

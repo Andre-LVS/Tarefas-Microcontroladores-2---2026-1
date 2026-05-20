@@ -25,6 +25,8 @@ static const char *TAG = "Body2WD";
 static pid_ctrl_block_handle_t PID_linear;
 static pid_ctrl_block_handle_t PID_angular;
 
+static int _bloqueado = 0; // 0 = livre, 1 = obstáculo detectado
+
 static int pulsosAnteriorRoda_D = 0; // Última leitura do encoder direito
 static int pulsosAnteriorRoda_E = 0; // Última leitura do encoder esquerdo
 
@@ -83,8 +85,33 @@ void Body2WD_SetErro(float erro){
 		
 	}
 };
+//mutex ->Parar ao detectar objeto=================
+
+void Body2WD_detectarObjeto(int bloqueado) {
+    if (xSemaphoreTake(mutex_erro_compartilhado, pdMS_TO_TICKS(10)) == pdTRUE) {
+        _bloqueado = bloqueado;
+        xSemaphoreGive(mutex_erro_compartilhado);
+    }
+}
+//======================================
+
+
 
 void Body2WD_Compute(){
+
+//=========Para ao detectar objeto=============
+
+int bloqueado_local = 0;
+    if (xSemaphoreTake(mutex_erro_compartilhado, pdMS_TO_TICKS(10)) == pdTRUE) {
+        bloqueado_local = _bloqueado;
+        xSemaphoreGive(mutex_erro_compartilhado);
+    }
+    if (bloqueado_local) {
+        wheel_SetVel(0, 0);
+        return; // sai da função sem calcular PID
+    }
+
+//=============================================
 	
 	float erro_local = 0.0;
 	if (xSemaphoreTake(mutex_erro_compartilhado, pdMS_TO_TICKS(10))==pdTRUE){ 
