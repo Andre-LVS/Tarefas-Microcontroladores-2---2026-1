@@ -45,8 +45,8 @@ void Body2WD_init(void){
 	//pid linear
 	pid_ctrl_config_t linear_config ={
 		.init_param ={
-			.kp = 120.00, // Ganho proporcional <- reage ao erro de velocidade ~80.00 ~110
-			.ki = 50.00, // Ganho integral →eliminar erro residual?~10
+			.kp = 280.00, // Ganho proporcional <- reage ao erro de velocidade ~80.00 ~110 ~280
+			.ki = 25.00, // Ganho integral →eliminar erro residual?~10 ~25
 			.kd = 0.0,
 			.max_output = VEL_RODA_MAX,
 			.min_output = VEL_RODA_MIN,
@@ -59,8 +59,8 @@ void Body2WD_init(void){
 	
 		pid_ctrl_config_t angular_config ={
 		.init_param ={
-			.kp = 85.0,  //testar valores diferentes
-			.ki = 0.1,  //aumetar valor depois de kp ficar estável. começar ao poucos. +1.0
+			.kp = 40.0,  //testar valores diferentes~15.0
+			.ki = 0.015,  //aumetar valor depois de kp ficar estável. começar ao poucos. ~0.05
 			.kd = 0.0,
 			.max_output = VEL_RODA_MAX,
 			.min_output = -VEL_RODA_MAX,
@@ -141,7 +141,7 @@ int bloqueado_local = 0;
 	//------------------------
 	
 	//------------PID linear--------
-	float erro_linear = 0.6 - velMedia; // 1.0 = velocidade "1 unidade de pulso/tick"
+	float erro_linear = 1.3 - velMedia; // 1.0 = velocidade "1 unidade de pulso/tick" ~1.2
 										// 2.0 = mais rápido | 0.5 = mais devagar
 
 

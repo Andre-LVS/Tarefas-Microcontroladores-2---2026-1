@@ -126,7 +126,7 @@ portTASK_FUNCTION(IR_Line, arg)
 			wheel_GoLeft();
 			ESP_LOGI(TAG, " 11100");
 			//wheel_SetVel(VEL_MIN, VEL_MIN);
-			Body2WD_SetErro(2.0f);
+			Body2WD_SetErro(3.0f);
 			break;
 			
 									
@@ -134,7 +134,7 @@ portTASK_FUNCTION(IR_Line, arg)
 			wheel_GoRight();
 			ESP_LOGI(TAG, "00111");
 			//wheel_SetVel(VEL_MIN, VEL_MIN);
-			Body2WD_SetErro(-2.0f);
+			Body2WD_SetErro(-3.0f);
 			break;
 			
 									
@@ -175,6 +175,7 @@ portTASK_FUNCTION(IR_Line, arg)
 			//wheel_SetVel(VEL_MIN, VEL_MIN);
 			Body2WD_SetErro(0.0f);
 			break;
+		
 		
 		default:
 			ESP_LOGI(TAG, "NOTHING!");

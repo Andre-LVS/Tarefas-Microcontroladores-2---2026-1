@@ -7,8 +7,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h" //Par usar o mutex
 
-#define VEL_RODA_MAX 290
-#define VEL_RODA_MIN 180
+#define VEL_RODA_MAX 300
+#define VEL_RODA_MIN 190
 
 
 //iniciar o PID e o Mutex

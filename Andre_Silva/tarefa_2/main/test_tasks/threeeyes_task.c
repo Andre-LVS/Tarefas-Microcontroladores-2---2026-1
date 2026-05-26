@@ -48,13 +48,13 @@ portTASK_FUNCTION(Threeeyes, args)
         {
 			 //vTaskSuspend(pid_task_handle);   //por algum motivo o taskSUspend e taskresume nõa funciona, o robô trava
             //wheel_SetVel( 0, 0);
-            Body2WD_SetBloqueado(1);   
+            Body2WD_detectarObjeto(1);   
             ESP_LOGI(TAG, "Obstáculo detectado.");
         }
 
         else
         {
-             Body2WD_SetBloqueado(0);
+             Body2WD_detectarObjeto(0);
             //vTaskResume(pid_task_handle);
         }
 
