@@ -34,11 +34,9 @@ static const char *TAG = "IR_Line";
 
 
 // ========= Velocidades  =========
-#define VEL_MAX      225  // Velocidade máxima  225 ficou bom
-//#define VEL_MED_SOFT 160  // Velocidade para curvs mais suaves
-//#define VEL_MED      160   // Velocidade média 
-#define VEL_MIN      190  // Velocidade mínima 190 ficou bom
+#define VEL_MAX      225  
 
+#define VEL_MIN      190  
 
 // ===================================
 
@@ -57,10 +55,8 @@ portTASK_FUNCTION(IR_Line, arg)
 
 	gpio_config( &ir_line_config );
 
-	//iniciar o robo
-	// wheel_Init();
-	 //wheel_SetVel(VEL_MAX, VEL_MAX);
-	// wheel_SetVel(BDC_MCPWM_DUTY_TICK_MAX, BDC_MCPWM_DUTY_TICK_MAX);
+	
+
     wheel_GoForward();
 
 	uint64_t gpioValue;
@@ -89,43 +85,44 @@ portTASK_FUNCTION(IR_Line, arg)
 		case 360704://11011
 			wheel_GoForward();
 			ESP_LOGI(TAG, "11011");
-			//wheel_SetVel(VEL_MAX, VEL_MAX);
+			
 			Body2WD_SetErro(0.0f);
 			break;
 			
 		case 426240://10111
 			wheel_GoRight();
 			ESP_LOGI(TAG, "10111 ");
-			//wheel_SetVel(VEL_MAX, VEL_MIN);
+			
 			Body2WD_SetErro(-1.0f); // levemente à esquerda
 			break;
 
 		case 229632://11101
 			wheel_GoLeft();
 			ESP_LOGI(TAG, "11101");
-			//wheel_SetVel(VEL_MIN, VEL_MAX);
+			
 			Body2WD_SetErro(1.0f); // levemente à direita
 			break;
 	
 		case 459008://01111
-			wheel_GoForward();
+			
+			wheel_GoRight();
 			ESP_LOGI(TAG, "01111");
-			//wheel_SetVel(VEL_MAX, 0);
+			
 			Body2WD_SetErro(-2.0f); // muito à esquerda
 			break;
 
 						
 		case 491520://11110
-			wheel_GoForward();
+			
+			wheel_GoLeft();
 			ESP_LOGI(TAG, "11110");
-			//wheel_SetVel(0, VEL_MAX);
 			Body2WD_SetErro(2.0f); // muito à direita
 			break;
 					
 		case 229376://11100
 			wheel_GoLeft();
 			ESP_LOGI(TAG, " 11100");
-			//wheel_SetVel(VEL_MIN, VEL_MIN);
+			
 			Body2WD_SetErro(3.0f);
 			break;
 			
@@ -133,7 +130,7 @@ portTASK_FUNCTION(IR_Line, arg)
 		case 393472://00111
 			wheel_GoRight();
 			ESP_LOGI(TAG, "00111");
-			//wheel_SetVel(VEL_MIN, VEL_MIN);
+			
 			Body2WD_SetErro(-3.0f);
 			break;
 			
@@ -141,7 +138,7 @@ portTASK_FUNCTION(IR_Line, arg)
 		case 98304://11000
 			wheel_GoLeft();
 			ESP_LOGI(TAG, "11000");
-			//wheel_SetVel(VEL_MIN, VEL_MIN); 
+			
 			Body2WD_SetErro(2.0f);
 			
 			break;
@@ -150,21 +147,21 @@ portTASK_FUNCTION(IR_Line, arg)
 		case 262400://00011
 			wheel_GoRight();
 			ESP_LOGI(TAG, "00011");
-			//wheel_SetVel(VEL_MIN, VEL_MIN);
+			
 			Body2WD_SetErro(-2.0f);			
 			break;
 			
 		case 295168://10011
 			wheel_GoForward();
 			ESP_LOGI(TAG, "10011");
-			//wheel_SetVel(VEL_MIN, 0);
+			
 			Body2WD_SetErro(-2.0f);
 			break;
 			
 		case 98560://11001
 			wheel_GoForward();
 			ESP_LOGI(TAG, "11001");
-			//wheel_SetVel(VEL_MIN, 0);
+			
 			Body2WD_SetErro(-2.0f);
 			break;
 			//----------------------
@@ -172,7 +169,7 @@ portTASK_FUNCTION(IR_Line, arg)
 		case 491776://11111 Cantinua andando até encontrar a pista
 			wheel_GoForward();
 			ESP_LOGI(TAG, "Looking 11111");
-			//wheel_SetVel(VEL_MIN, VEL_MIN);
+		
 			Body2WD_SetErro(0.0f);
 			break;
 		

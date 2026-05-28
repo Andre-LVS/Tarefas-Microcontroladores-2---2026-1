@@ -44,7 +44,7 @@ portTASK_FUNCTION(Threeeyes, args)
         //Parar para o robô ao detectar um obstáculo
 
         
-        if (distance < 10.0)
+        if (distance < 12.0)
         {
 			 //vTaskSuspend(pid_task_handle);   //por algum motivo o taskSUspend e taskresume nõa funciona, o robô trava
             //wheel_SetVel( 0, 0);

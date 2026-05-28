@@ -45,11 +45,11 @@ void Body2WD_init(void){
 	//pid linear
 	pid_ctrl_config_t linear_config ={
 		.init_param ={
-			.kp = 280.00, // Ganho proporcional <- reage ao erro de velocidade ~80.00 ~110 ~280
-			.ki = 25.00, // Ganho integral →eliminar erro residual?~10 ~25
+			.kp = 150.00, // Ganho proporcional
+			.ki = 30.00, // Ganho integral 
 			.kd = 0.0,
 			.max_output = VEL_RODA_MAX,
-			.min_output = VEL_RODA_MIN,
+			.min_output = 240, 
 			 
 		}
 	};
@@ -59,8 +59,8 @@ void Body2WD_init(void){
 	
 		pid_ctrl_config_t angular_config ={
 		.init_param ={
-			.kp = 40.0,  //testar valores diferentes~15.0
-			.ki = 0.015,  //aumetar valor depois de kp ficar estável. começar ao poucos. ~0.05
+			.kp = 40.0,  
+			.ki = 0.015,  
 			.kd = 0.0,
 			.max_output = VEL_RODA_MAX,
 			.min_output = -VEL_RODA_MAX,
@@ -131,7 +131,7 @@ int bloqueado_local = 0;
 	
 	wheel_GetEndoderPulses(&pulsoAtualRoda_E, &pulsoAtualRoda_D);
 
-	float velRoda_D = (pulsoAtualRoda_D - pulsosAnteriorRoda_D) / pdMS_TO_TICKS(20);
+	float velRoda_D = (pulsoAtualRoda_D - pulsosAnteriorRoda_D) / pdMS_TO_TICKS(20);  
 	float velRoda_E = (pulsoAtualRoda_E - pulsosAnteriorRoda_E) / pdMS_TO_TICKS(20);
 	
 	pulsosAnteriorRoda_D = pulsoAtualRoda_D;
@@ -141,8 +141,8 @@ int bloqueado_local = 0;
 	//------------------------
 	
 	//------------PID linear--------
-	float erro_linear = 1.3 - velMedia; // 1.0 = velocidade "1 unidade de pulso/tick" ~1.2
-										// 2.0 = mais rápido | 0.5 = mais devagar
+	float erro_linear = 3.0 - velMedia; 
+										
 
 
 	pid_compute(PID_linear, erro_linear, &v);
