@@ -14,7 +14,7 @@ TaskHandle_t pid_task_handle = NULL; //handle para o vTaskSuspend ou  vTaskResum
 portTASK_FUNCTION(PID_Task, arg){
 	
 	//-----------tarefa 3-------------
-	wcet_gpio_int();
+	
 	esp_task_wdt_add(NULL);
 	//-------------------------------
 
@@ -22,6 +22,10 @@ portTASK_FUNCTION(PID_Task, arg){
 
     while(1){
 		
+         while(1); // <-- teste de estouro do WDT.
+                    //Isso trava a task e o WDT vai disparar em 500ms.
+                    //remover depois
+                    
 		WCET_INICIO(WCET_GPIO_PID); //Tarefa 3 -> inicio do WCET
 		
         //calcula o PID e move os motores

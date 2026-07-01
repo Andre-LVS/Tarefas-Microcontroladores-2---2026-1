@@ -42,7 +42,7 @@
 #define PID_TASK
 
 //tarefa 3
-#define LOG_TASK;
+#define LOG_TASK
 
 void app_main(void)
 {
@@ -50,7 +50,9 @@ void app_main(void)
     wheel_Init(); // inicializa motores e encoders
     //wheel_GoForward(); // define direção
     Body2WD_init(); // inicializa PID e mutex
-								 	
+    
+	wcet_gpio_int(); //tarefa3-> inicializa os pinos de WCET
+
 //Tarefa 3 -> ADicionar WatchDog |\/\/|
 //								 |/\/\|
 
@@ -68,7 +70,7 @@ esp_task_wdt_config_t wdt_config = {
                 "threeeyes",
                 configMINIMAL_STACK_SIZE*3,
                 NULL,
-                5,
+                4,
                 NULL);
 #endif
 
